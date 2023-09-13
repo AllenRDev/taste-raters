@@ -15,8 +15,22 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            backgroundColor: {
+                'green': '#709C5A', // Replace with your desired color code
+                'green-hover': '#6D8E5C', // Replace with the darker color code for hover
+              },
+              textColor: {
+                'green': '#709C5A', // Replace with your desired color code
+              },
         },
     },
 
-    plugins: [forms],
+    plugins: [  function ({ addVariant, e }) {
+        addVariant('hover', ({ modifySelectors, separator }) => {
+          modifySelectors(({ className }) => {
+            return `.${e(`hover${separator}${className}`)}:hover`;
+          });
+        });
+    }
+    ],
 };
