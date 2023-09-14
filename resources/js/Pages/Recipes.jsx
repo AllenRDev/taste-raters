@@ -1,21 +1,38 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import RecipeCard from '@/Components/RecipeCard';
 import { Head } from '@inertiajs/react';
 
 export default function Recipes({ auth }) {
-    return (
-        <AuthenticatedLayout
-            user={auth.user}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Recipes</h2>}
-        >
-            <Head title="Recipes" />
+  const sampleRecipe = {
+    title: 'Delicious Pasta',
+    image: '/images/pasta.jpg',
+    author: 'John Doe',
+    ingredients: ['Pasta', 'Tomato Sauce', 'Parmesan Cheese', 'Oregano'],
+    instructions: [
+      'Boil the pasta in a large pot of salted water.',
+      'Heat the tomato sauce in a separate pan.',
+      'Mix the cooked pasta with the sauce and add Parmesan cheese and oregano for flavor.',
+    ],
+  };
 
-            <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="p-6 text-gray-900">Recipes go here</div>
-                    </div>
-                </div>
+  const recipes = Array(10).fill(sampleRecipe);
+
+  return (
+    <AuthenticatedLayout user={auth.user}>
+      <Head title="Recipes" />
+
+      <div className="py-12">
+        <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+          <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div className="container mx-auto p-4 grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+              {recipes.map((recipe, index) => (
+                <RecipeCard key={index} recipe={recipe} />
+              ))}
             </div>
-        </AuthenticatedLayout>
-    );
+          </div>
+        </div>
+      </div>
+    </AuthenticatedLayout>
+  );
 }
+
