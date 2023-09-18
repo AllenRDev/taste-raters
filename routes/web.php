@@ -26,9 +26,14 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/recipes', function () {
+Route::get('/explore', function () {
     return Inertia::render('Recipes');
-})->middleware(['auth', 'verified'])->name('recipes');
+})->middleware(['auth', 'verified'])->name('explore');
+
+Route::resource('recipes', RecipeController::class)
+    ->only(['index', 'store'])
+    ->middleware(['auth', 'verified']);
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

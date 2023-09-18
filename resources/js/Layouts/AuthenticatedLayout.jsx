@@ -9,8 +9,8 @@ export default function Authenticated({ user, header, children }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
 
     return (
-        <div className="min-h-screen bg-gray-100">
-            <nav className="bg-white border-b border-gray-100">
+        <div className="min-h-screen bg-[#84A59D]/30">
+            <nav className="bg-gray-600/50 bg-blend-overlay">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between h-16">
                         <div className="flex">
@@ -21,8 +21,8 @@ export default function Authenticated({ user, header, children }) {
                             </div>
 
                             <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <NavLink href={route('recipes')} active={route().current('recipes')}>
-                                    Recipes
+                                <NavLink href={route('explore')} active={route().current('explore')}>
+                                    Explore
                                 </NavLink>
                             </div>
                         </div>
@@ -34,7 +34,7 @@ export default function Authenticated({ user, header, children }) {
                                         <span className="inline-flex rounded-md">
                                             <button
                                                 type="button"
-                                                className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
+                                                className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md bg-blend-overlay focus:outline-none transition ease-in-out duration-150"
                                             >
                                                 {user.name}
 
@@ -54,9 +54,9 @@ export default function Authenticated({ user, header, children }) {
                                         </span>
                                     </Dropdown.Trigger>
 
-                                    <Dropdown.Content>
+                                    <Dropdown.Content className="bg-blend-overlay">
                                         <Dropdown.Link href={route('profile.edit')}>Profile</Dropdown.Link>
-                                        <Dropdown.Link href="">Submit Recipe</Dropdown.Link>
+                                        <Dropdown.Link href={route('recipes.index')} >Submit Recipe</Dropdown.Link>
                                         <Dropdown.Link href={route('logout')} method="post" as="button">
                                             Log Out
                                         </Dropdown.Link>
@@ -93,8 +93,8 @@ export default function Authenticated({ user, header, children }) {
 
                 <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'}>
                     <div className="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink href={route('recipes')} active={route().current('recipes')}>
-                            Recipes
+                        <ResponsiveNavLink href={route('explore')} active={route().current('explore')}>
+                            explore
                         </ResponsiveNavLink>
                     </div>
 

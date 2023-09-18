@@ -3,9 +3,10 @@ export default function Guest({ children }) {
         <div className="min-h-screen flex flex-col relative">
             <main className="flex-grow relative">
                 <img
-                    src='images/Guest.jpg'
+                    src='images/Guest.png'
                     alt="Guest Image"
                     className="w-full h-screen object-cover"
+                    loading="lazy"
                 />
             </main>
             <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#341803]/10 bg-blend-overlay">
