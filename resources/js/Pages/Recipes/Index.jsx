@@ -5,35 +5,49 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import { useForm, Head } from '@inertiajs/react';
 
 export default function Index({ auth }) {
+  const { data, setData, post, processing, reset, errors } = useForm({
+    name: '',
+    image: '',
+    description: '',
+    ingredients: [''],
+    instructions: [''],
+  });
 
-    const [recipeName, setRecipeName] = useState('');
     const [recipeImage, setRecipeImage] = useState('');
-    const [description, setDescription] = useState('');
     const [ingredients, setIngredients] = useState(['', '']);
     const [instructions, setInstructions] = useState(['', '']);
     const [showAlert, setShowAlert] = useState(false);
-  
-    const handleImageChange = (e) => {
-      const selectedImage = e.target.files[0];
-      if (selectedImage) {
-        setRecipeImage(selectedImage);
-      }
+    const [alertMessage, setAlertMessage] = useState('');
+
+    const handleImageChange = (file) => {
+      setRecipeImage(file);
+      setData('image', file);
     };
 
     const addIngredient = () => {
-      if (ingredients.length < 15) {
-        setIngredients([...ingredients, '']);
+      if (ingredients.length > 15) {
+        setAlertMessage('You cannot have more than 15 ingredients!');
+        setShowAlert(true);
+        return;
       }
+      setIngredients([...ingredients, '']);
+      setData('ingredients', ingredients);
+     
     };
   
     const addInstruction = () => {
-      if (instructions.length < 10) {
-        setInstructions([...instructions, '']);
+      if (instructions.length > 10) {
+        setAlertMessage('You cannot have more than 10 steps!');
+        setShowAlert(true);
+        return;
       }
+      setInstructions([...instructions, '']);
+      setData('instructions', instructions);
     };
 
     const deleteIngredient = (index) => {
       if (ingredients.length === 2) {
+        setAlertMessage('You cannot delete this. At least two ingredients are required!');
         setShowAlert(true);
         return;
       }
@@ -41,10 +55,12 @@ export default function Index({ auth }) {
       const updatedIngredients = [...ingredients];
       updatedIngredients.splice(index, 1);
       setIngredients(updatedIngredients);
+      setData('ingredients', updatedIngredients);
     };
 
     const deleteInstruction = (index) => {
       if (instructions.length === 2) {
+        setAlertMessage('You cannot delete this. At least two steps are required!');
         setShowAlert(true);
         return;
       }
@@ -52,18 +68,21 @@ export default function Index({ auth }) {
       const updatedInstructions = [...instructions];
       updatedInstructions.splice(index, 1);
       setInstructions(updatedInstructions);
+      setData('instructions', updatedInstructions);
     };
   
     const handleIngredientChange = (index, value) => {
       const updatedIngredients = [...ingredients];
       updatedIngredients[index] = value;
       setIngredients(updatedIngredients);
+      setData('ingredients', updatedIngredients);
     };
   
     const handleInstructionChange = (index, value) => {
       const updatedInstructions = [...instructions];
       updatedInstructions[index] = value;
       setInstructions(updatedInstructions);
+      setData('instructions', updatedInstructions);
     };
 
     useEffect(() => {
@@ -78,24 +97,16 @@ export default function Index({ auth }) {
   
     const handleSubmit = (e) => {
       e.preventDefault();
-  
-      // Process and submit the form data as needed
-      const formData = {
-        recipeName,
-        recipeImage,
-        ingredients,
-        instructions,
-      };
 
-      post(route('recipe.store'), { onSuccess: () => reset() });
-  
-      // Perform the submission action, e.g., API request or Inertia.js request
-  
-      // Reset the form fields after submission
-      setRecipeName('');
-      setRecipeImage('');
-      setIngredients(['']);
-      setInstructions(['']);
+      if (ingredients.some((ingredient) => ingredient === '') || instructions.some((instruction) => instruction === '')) {
+        // Show an error message or prevent form submission
+        setAlertMessage('You cannot have empty ingredients or instructions!');
+        setShowAlert(true);
+        return;
+      }
+    
+
+      post(route('recipes.store'), { onSuccess: () => reset() });
     };
   
     return (
@@ -107,12 +118,12 @@ export default function Index({ auth }) {
             <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
               <div className="p-6 bg-white border-b border-gray-200">
               {showAlert && (
-                <div className="mt-2 p-2 mb-3 bg-red-100 border border-red-400 text-red-700 rounded-md">
-                  You cannot delete this. At least two ingredients/steps are required.
+                <div className="mt-2 p-2 mb-2 bg-red-100 border border-red-400 text-red-700 rounded-md">
+                  {alertMessage}
                 </div>
                 )}
                 <form onSubmit={handleSubmit}>
-                  <div className="mb-4">
+                  <div className="mb-2">
                     <label htmlFor="recipeName" className="block text-sm font-medium text-gray-700">
                       Recipe Name
                     </label>
@@ -120,13 +131,14 @@ export default function Index({ auth }) {
                       type="text"
                       id="recipeName"
                       name="recipeName"
-                      value={recipeName}
-                      onChange={(e) => setRecipeName(e.target.value)}
+                      value={data.recipeName}
+                      onChange={(e) => setData('name' ,e.target.value)}
                       required
-                      className="mt-1 p-2 block w-full border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-200"
+                      className="mt-1 p-1 block w-full border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-200"
                     />
                   </div>
-                  <div className="mb-4">
+                  <InputError message={errors.name} className='mb-2'/>
+                  <div className="mb-2">
                         <label htmlFor="recipeImage" className="block text-sm font-medium text-gray-700">
                             Recipe Image
                         </label>
@@ -135,7 +147,7 @@ export default function Index({ auth }) {
                             id="recipeImage"
                             name="recipeImage"
                             accept="image/*"
-                            onChange={(e) => setRecipeImage(e.target.files[0])}
+                            onChange={(e) => handleImageChange(e.target.files[0])}
                             required
                             className="mt-1 p-2 block w-full border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-200"
                         />
@@ -147,7 +159,8 @@ export default function Index({ auth }) {
                         />
                       )}
                     </div>
-                    <div className="mb-4">
+                    <InputError message={errors.image} className='mb-2'/>
+                    <div className="mb-2">
                     <label htmlFor="description" className="block text-sm font-medium text-gray-700">
                       Recipe Description
                     </label>
@@ -155,13 +168,14 @@ export default function Index({ auth }) {
                       type="text"
                       id="description"
                       name="description"
-                      value={description}
-                      onChange={(e) => setDescription(e.target.value)}
+                      value={data.description}
+                      onChange={(e) => setData('description' ,e.target.value)}
                       required
                       className="mt-1 p-2 block w-full border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-200"
                     />
                   </div>
-                  <div className="mb-4">
+                  <InputError message={errors.description} className='mb-2'/>
+                  <div className="mb-2">
                     <label className="block text-sm font-medium text-gray-700">Ingredients</label>
                     {ingredients.map((ingredient, index) => (
                       <div key={index} className="flex items-center">
@@ -189,7 +203,8 @@ export default function Index({ auth }) {
                       </div>
                     ))}
                   </div>
-                  <div className="mb-4">
+                  <InputError message={errors.ingredients} className='mb-2'/>
+                  <div className="mb-2">
                     <label className="block text-sm font-medium text-gray-700">Instructions</label>
                     {instructions.map((instruction, index) => (
                       <div key={index} className="flex items-center">
@@ -208,7 +223,7 @@ export default function Index({ auth }) {
                         </button>
                         <button
                               type="button"
-                              onClick={() => deleteIngredient(index)}
+                              onClick={() => deleteInstruction(index)}
                               className="ml-2 px-3 py-2 border border-gray-300 rounded-md bg-red-200 text-red-800 hover:bg-red-300 hover:text-red-900 focus:outline-none focus:ring focus:ring-red-200"
                             >
                               -
@@ -216,6 +231,7 @@ export default function Index({ auth }) {
                       </div>
                     ))}
                   </div>
+                  <InputError message={errors.instructions} className='mb-2'/>
                   <div className="mt-4">
                     <button
                       type="submit"
