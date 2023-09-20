@@ -1,9 +1,10 @@
 import React from 'react';
-import { Link } from '@inertiajs/react';
+import { Link, Head } from '@inertiajs/react';
 
 const Welcome = () => {
   return (
     <div className="min-h-screen flex flex-col relative">
+      <Head title="Welcome"/>
       <header className="text-center p-3 md:p-6 absolute w-full z-10">
         <h1 className="text-2xl md:text-5xl font-bold text-orange-200/80 mix-blend-color-burn font-lobster">Welcome to Tasterater</h1>
       </header>

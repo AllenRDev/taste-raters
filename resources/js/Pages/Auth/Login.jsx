@@ -30,6 +30,12 @@ export default function Login({ status, canResetPassword }) {
         <GuestLayout>
             <Head title="Log in" />
 
+            <div className="text-left">
+                <Link href="/" className="text-orange-200 hover:text-orange-400 text-sm">
+                    Back
+                </Link>
+            </div>
+
             {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
 
             <form onSubmit={submit}>
@@ -90,6 +96,15 @@ export default function Login({ status, canResetPassword }) {
                     <PrimaryButton className="ml-4" disabled={processing}>
                         Log in
                     </PrimaryButton>
+                </div>
+                <div className="mt-4 text-center">
+                    <span className="text-orange-200">Not Registered?</span>
+                    <Link
+                        href={route('register')}
+                        className="ml-2 underline text-sm text-orange-200 hover:text-orange-400 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    >
+                        Register
+                    </Link>
                 </div>
             </form>
         </GuestLayout>

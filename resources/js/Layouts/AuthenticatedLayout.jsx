@@ -9,7 +9,7 @@ export default function Authenticated({ user, header, children }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
 
     return (
-        <div className="min-h-screen bg-[#84A59D]/30">
+        <div className="min-h-screen bg-[#84A59D]/30 root">
             <nav className="bg-gray-600/50 bg-blend-overlay">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between h-16">
@@ -21,8 +21,8 @@ export default function Authenticated({ user, header, children }) {
                             </div>
 
                             <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <NavLink href={route('explore')} active={route().current('explore')}>
-                                    Explore
+                                <NavLink href={route('recipes.index')} active={route().current('recipes.index')}>
+                                    Recipes
                                 </NavLink>
                             </div>
                         </div>
@@ -56,7 +56,7 @@ export default function Authenticated({ user, header, children }) {
 
                                     <Dropdown.Content className="bg-blend-overlay">
                                         <Dropdown.Link href={route('profile.edit')}>Profile</Dropdown.Link>
-                                        <Dropdown.Link href={route('recipes.index')} >Submit Recipe</Dropdown.Link>
+                                        <Dropdown.Link href={route('recipes.create')} >Submit Recipe</Dropdown.Link>
                                         <Dropdown.Link href={route('logout')} method="post" as="button">
                                             Log Out
                                         </Dropdown.Link>
@@ -93,8 +93,8 @@ export default function Authenticated({ user, header, children }) {
 
                 <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'}>
                     <div className="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink href={route('explore')} active={route().current('explore')}>
-                            explore
+                        <ResponsiveNavLink href={route('recipes.index')} active={route().current('recipes.index')}>
+                            Recipes
                         </ResponsiveNavLink>
                     </div>
 
@@ -108,6 +108,10 @@ export default function Authenticated({ user, header, children }) {
                             <ResponsiveNavLink href={route('profile.edit')}>
                                 Profile
                             </ResponsiveNavLink>
+                            <Dropdown.Link href={route('recipes.create')}>
+                                Submit Recipe
+                            </Dropdown.Link>
+
                             <ResponsiveNavLink method="post" href={route('logout')} as="button">
                                 Log Out
                             </ResponsiveNavLink>

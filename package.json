@@ -21,6 +21,7 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
+        "react-modal": "^3.16.1",
         "styled-components": "^6.0.7"
     }
 }

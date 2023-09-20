@@ -26,14 +26,14 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/explore', function () {
-    return Inertia::render('Recipes');
-})->middleware(['auth', 'verified'])->name('explore');
-
 Route::resource('recipes', RecipeController::class)
-    ->only(['index', 'store'])
+    ->only(['index', 'create' ,'store'])
     ->middleware(['auth', 'verified']);
 
+Route::get('recipe-images/{filename}', function ($filename) {
+    $filePath = storage_path('app/public/' . $filename);
+    return response()->file($filePath);
+})->name('recipe.images');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

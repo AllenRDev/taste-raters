@@ -1,8 +1,9 @@
 import React from 'react';
 
-const RecipeCard = ({ recipe }) => {
+const Recipe = ({ recipe, onClick }) => {
+
   return (
-    <div className="bg-white rounded-lg overflow-hidden shadow-lg w-64 max-h-[400px] mx-auto">
+    <div className="bg-white rounded-lg overflow-hidden shadow-lg w-64 max-h-[400px] mx-auto" onClick={() => onClick(recipe)}>
       <div className="h-48 overflow-hidden">
         <img
           src={recipe.image}
@@ -35,8 +36,9 @@ const RecipeCard = ({ recipe }) => {
         </div>
       </div>
     </div>
+    
   );
 };
 
-export default RecipeCard;
+export default Recipe;
 
