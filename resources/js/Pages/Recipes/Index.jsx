@@ -16,11 +16,12 @@ export default function Index({ auth }) {
     setIsModalOpen(true);
   };
 
-  const recipes = [
+  const recipe = 
     {
       id: 1,
       name: 'Chicken Adobo',
-      image: 'https://images.unsplash.com/photo-1611009665886-4b0b2b0b0b0b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YWRvYm98ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80',
+      image: 'storage/app/public/recipe-images/ms6Z2Yxrt1RS39TX2qgolgjhbSF19TFA6hM50g6b.jpg',
+      description: 'Chicken Adobo is a Filipino dish made with only a few ingredients. It is easy to make and full of flavor. Serve it with rice for a simple yet satisfying meal.',
       ingredients: [
         '1/2 cup soy sauce',
         '1/2 cup white vinegar',
@@ -36,24 +37,35 @@ export default function Index({ auth }) {
         'Transfer chicken to a platter and keep warm. Strain and reserve liquid in the pot.',
         'Heat oil in a large skillet over medium heat. Add chicken; cook until browned, about 3 minutes per side. Transfer to a serving platter. Pour reserved cooking liquid into the skillet; add sugar and simmer until thickened, 5 to 7 minutes. Pour sauce over chicken.',
       ],
-    },
-  ];
+    };
+    //Fill new recipes array with 20 of recipe
+    const recipes = Array(20).fill(recipe);
+
+  //Fill recipe array with 20 of these
+
+
 
   return (
     <AuthenticatedLayout user={auth.user}>
       <Head title="Recipes" />
 
-      <div className="py-12">
-        <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-          <div className="bg-gray-200 overflow-hidden shadow-sm sm:rounded-lg">
-            <div className="container mx-auto p-4 grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-              {recipes.map((recipe, index) => (
-                  <Recipe key={index} recipe={recipe} onClick={() => handleRecipeClick(recipe)} />
-              ))}
-            </div>
-          </div>
-        </div>
+      <h2 className="font-bold mb-12 text-5xl">Recipes</h2>
+
+<div className='relative'>
+<input placeholder='Search Recipes' className='mt-1 p-3 text-sm block lg:w-2/5 w-full mb-10 bg-white border-none rounded-lg focus:outline-none focus:ring focus:ring-blue-200'></input>
+  <div className='absolute inset-y-0 lg:left-[37%] md:left-[95%] left-[91%] flex items-center pr-3 pointer-events-none text-slate-400'>
+      <span class="material-icons">
+        search
+    </span>
+  </div>
+</div>
+      
+      <div className="grid lg:gap-10 lg:grid-cols-4 md:gap-4 md:grid-cols-3 grid-cols-1">
+        {recipes.map((recipe, index) => (
+          <Recipe key={index} recipe={recipe} onClick={() => handleRecipeClick(recipe)} />
+        ))}
       </div>
+
       {isModalOpen && (
         <RecipeModal
           recipe={selectedRecipe}

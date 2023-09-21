@@ -31,8 +31,8 @@ export default function Login({ status, canResetPassword }) {
             <Head title="Log in" />
 
             <div className="text-left">
-                <Link href="/" className="text-orange-200 hover:text-orange-400 text-sm">
-                    Back
+                <Link href="/" className="text-orange-200/80 hover:text-orange-100 text-sm transition-colors duration-300">
+                    <span className='material-symbols-outlined'>arrow_back</span> 
                 </Link>
             </div>
 
@@ -93,11 +93,11 @@ export default function Login({ status, canResetPassword }) {
                         </Link>
                     )}
 
-                    <PrimaryButton className="ml-4" disabled={processing}>
+                    <PrimaryButton className="ml-4 bg-transparent text-white" disabled={processing}>
                         Log in
                     </PrimaryButton>
                 </div>
-                <div className="mt-4 text-center">
+                <div className="mt-6 text-center">
                     <span className="text-orange-200">Not Registered?</span>
                     <Link
                         href={route('register')}

@@ -16,7 +16,7 @@ class RecipeController extends Controller
     public function index(): Response
     {
         return Inertia::render('Recipes/Index', [
-            // 'recipes' => Recipe::with('user:id,name,image,description,ingredients,instructions')->latest()->get(),
+            'recipes' => Recipe::with('user:id,name,image,description,ingredients,instructions')->latest()->get(),
         ]);
     }
 
@@ -33,7 +33,7 @@ class RecipeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request) : RedirectResponse
+    public function store(Request $request): RedirectResponse
     {
         $request->merge([
             'ingredients' => json_encode($request->ingredients),
@@ -48,14 +48,12 @@ class RecipeController extends Controller
             'instructions' => 'required|json',
         ]);
 
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('recipes', 'public');
-            $request->image = $imagePath;
-        }
- 
+        //Store and save images in storage/app/public folder
+        $validated['image'] = $request->file('image')->store('recipe-images', 'public');
+        
         $request->user()->recipes()->create($validated);
- 
-        return redirect(route('recipes'));
+
+        return redirect(route('recipes.index'));
     }
 
     /**

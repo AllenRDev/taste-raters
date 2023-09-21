@@ -112,17 +112,17 @@ export default function Create({ auth }) {
       <AuthenticatedLayout user={auth.user}>
         <Head title="Submit" />
   
-        <div className="py-12">
-          <div className="max-w-2xl mx-auto sm:px-6 lg:px-8">
-            <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-              <div className="p-6 bg-white border-b border-gray-200">
+        <div className="py-10">
+          <div className="max-w-2xl mx-auto sm:px-6 lg:px-8 ">
+            <div className="overflow-hidden shadow-sm sm:rounded-lg bg-white/30 border border-black/20">
+              <div className="p-6  border-b border-gray-200">
               {showAlert && (
                 <div className="mt-2 p-2 mb-2 bg-red-100 border border-red-400 text-red-700 rounded-md">
                   {alertMessage}
                 </div>
                 )}
                 <form onSubmit={handleSubmit}>
-                  <div className="mb-2">
+                  <div className="mb-3">
                     <label htmlFor="recipeName" className="block text-sm font-medium text-gray-700">
                       Recipe Name
                     </label>
@@ -137,29 +137,31 @@ export default function Create({ auth }) {
                     />
                   </div>
                   <InputError message={errors.name} className='mb-2'/>
-                  <div className="mb-2">
-                        <label htmlFor="recipeImage" className="block text-sm font-medium text-gray-700">
-                            Recipe Image
-                        </label>
-                        <input
-                            type="file"
-                            id="recipeImage"
-                            name="recipeImage"
-                            accept="image/*"
-                            onChange={(e) => handleImageChange(e.target.files[0])}
-                            required
-                            className="mt-1 p-2 block w-full border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-200"
-                        />
-                        {recipeImage && (
-                        <img
-                          src={URL.createObjectURL(recipeImage)}
-                          alt="Recipe Preview"
-                          className="mt-2 h-32 w-32 object-cover border border-gray-300 rounded-md"
-                        />
-                      )}
+                  <div className="mb-3">
+                    <label htmlFor="recipeImage" className="block text-sm font-medium text-gray-700">
+                      Recipe Image
+                    </label>
+                    <input
+                      type="file"
+                      id="recipeImage"
+                      name="recipeImage"
+                      value={data.recipeImage}
+                      onChange={(e) => handleImageChange(e.target.files[0])}
+                      required
+                      className="mt-1 p-2 block w-full border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-200"
+                    />
+                  {recipeImage && (
+                    <div className="mt-2">
+                      <img
+                        src={URL.createObjectURL(recipeImage)}
+                        alt="Recipe Image"
+                        className="w-40 h-40 object-cover mx-auto border border-black"
+                      />
                     </div>
+                      )}
+                  </div>
                     <InputError message={errors.image} className='mb-2'/>
-                    <div className="mb-2">
+                    <div className="mb-3">
                     <label htmlFor="description" className="block text-sm font-medium text-gray-700">
                       Recipe Description
                     </label>
@@ -174,7 +176,7 @@ export default function Create({ auth }) {
                     />
                   </div>
                   <InputError message={errors.description} className='mb-2'/>
-                  <div className="mb-2">
+                  <div className="mb-3">
                     <label className="block text-sm font-medium text-gray-700">Ingredients</label>
                     {ingredients.map((ingredient, index) => (
                       <div key={index} className="flex items-center">
@@ -203,7 +205,7 @@ export default function Create({ auth }) {
                     ))}
                   </div>
                   <InputError message={errors.ingredients} className='mb-2'/>
-                  <div className="mb-2">
+                  <div className="mb-3">
                     <label className="block text-sm font-medium text-gray-700">Instructions</label>
                     {instructions.map((instruction, index) => (
                       <div key={index} className="flex items-center">
@@ -230,7 +232,7 @@ export default function Create({ auth }) {
                       </div>
                     ))}
                   </div>
-                  <InputError message={errors.instructions} className='mb-2'/>
+                  <InputError message={errors.instructions} className='mb-3'/>
                   <div className="mt-4">
                     <button
                       type="submit"

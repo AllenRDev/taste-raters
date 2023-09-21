@@ -3,36 +3,23 @@ import React from 'react';
 const Recipe = ({ recipe, onClick }) => {
 
   return (
-    <div className="bg-white rounded-lg overflow-hidden shadow-lg w-64 max-h-[400px] mx-auto" onClick={() => onClick(recipe)}>
-      <div className="h-48 overflow-hidden">
-        <img
+    <div className="bg-white inline-block rounded-2xl shadow-xl shadow-slate-700/10" onClick={() => onClick(recipe)}>
+      <div>
+        {/* <img
           src={recipe.image}
           alt={recipe.title}
-          className="w-full h-auto"
-        />
+        /> */}
+
+        <div className="bg-slate-300 rounded-t-2xl h-40 w-full"></div>
       </div>
-      <div className="p-4 pt-1">
-        <h2 className="text-lg font-semibold">{recipe.title}</h2>
-        <p className="text-gray-600 text-sm">By {recipe.author}</p>
-        <div className="mt-4">
-          <h3 className="text-md font-semibold">Ingredients:</h3>
-          <ul className="list-disc list-inside">
-            {recipe.ingredients.map((ingredient, index) => (
-              <li key={index} className="text-gray-700">
-                {ingredient}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="mt-4">
-          <h3 className="text-md font-semibold">Instructions:</h3>
-          <ol className="list-decimal list-inside">
-            {recipe.instructions.map((instruction, index) => (
-              <li key={index} className="text-gray-700">
-                {instruction}
-              </li>
-            ))}
-          </ol>
+
+      <div className="p-4">
+        <h2 className="font-bold mb-2 text-lg">{recipe.name}</h2>
+
+        <div className='text-md leading-tight'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae quo, enim voluptatum ipsa nulla quaerat id nostrum, repellat optio eos sit perferendis in facilis deserunt.</div>
+
+        <div className="flex justify-end">
+          <a href="#" className="font-bold text-slate-500">View</a>
         </div>
       </div>
     </div>

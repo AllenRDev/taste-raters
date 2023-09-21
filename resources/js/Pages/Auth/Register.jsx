@@ -31,6 +31,11 @@ export default function Register() {
             <Head title="Register" />
 
             <form onSubmit={submit}>
+            <div className="text-left">
+                <Link href="/" className="text-orange-200/80 hover:text-orange-100 text-sm transition-colors duration-300">
+                    <span className='material-symbols-outlined'>arrow_back</span> 
+                </Link>
+            </div>
                 <div>
                     <InputLabel htmlFor="name" value="Name" />
 

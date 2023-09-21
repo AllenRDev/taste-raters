@@ -9,37 +9,31 @@ export default function Authenticated({ user, header, children }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
 
     return (
-        <div className="min-h-screen bg-[#84A59D]/30 root">
-            <nav className="bg-gray-600/50 bg-blend-overlay">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex justify-between h-16">
+        <div className="min-h-screen bg-slate-200">
+            <nav className="bg-slate-900 mb-12 py-3">
+                <div className="w-4/5 mx-auto">
+                    <div className="flex justify-between">
                         <div className="flex">
                             <div className="shrink-0 flex items-center">
                                 <Link href="/">
-                                    <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800" />
+                                    <ApplicationLogo className="block h-9 w-auto fill-current text-white" />
                                 </Link>
-                            </div>
-
-                            <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <NavLink href={route('recipes.index')} active={route().current('recipes.index')}>
-                                    Recipes
-                                </NavLink>
                             </div>
                         </div>
 
                         <div className="hidden sm:flex sm:items-center sm:ml-6">
-                            <div className="ml-3 relative">
+                            <div className="">
                                 <Dropdown>
                                     <Dropdown.Trigger>
                                         <span className="inline-flex rounded-md">
                                             <button
                                                 type="button"
-                                                className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md bg-blend-overlay focus:outline-none transition ease-in-out duration-150"
+                                                className="inline-flex items-center px-3 py-2 text-sm text-white leading-4 font-medium rounded-md bg-blend-overlay focus:outline-none transition ease-in-out duration-150"
                                             >
                                                 {user.name}
 
                                                 <svg
-                                                    className="ml-2 -mr-0.5 h-4 w-4"
+                                                    className="ml-2 -mr-0.5 h-4 w-4 fill-white"
                                                     xmlns="http://www.w3.org/2000/svg"
                                                     viewBox="0 0 20 20"
                                                     fill="currentColor"
@@ -65,12 +59,12 @@ export default function Authenticated({ user, header, children }) {
                             </div>
                         </div>
 
-                        <div className="-mr-2 flex items-center sm:hidden">
+                        <div className="flex items-center sm:hidden">
                             <button
                                 onClick={() => setShowingNavigationDropdown((previousState) => !previousState)}
-                                className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
+                                className="inline-flex items-center justify-center p-2 rounded-md text-white focus:outline-none focus:bg-gray-900 focus:text-gray-500 transition duration-150 ease-in-out"
                             >
-                                <svg className="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                                <svg className="h-6 w-6 text-gray-800" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                                     <path
                                         className={!showingNavigationDropdown ? 'inline-flex' : 'hidden'}
                                         strokeLinecap="round"
@@ -98,7 +92,7 @@ export default function Authenticated({ user, header, children }) {
                         </ResponsiveNavLink>
                     </div>
 
-                    <div className="pt-4 pb-1 border-t border-gray-200">
+                    <div className="">
                         <div className="px-4">
                             <div className="font-medium text-base text-gray-800">{user.name}</div>
                             <div className="font-medium text-sm text-gray-500">{user.email}</div>
@@ -108,10 +102,9 @@ export default function Authenticated({ user, header, children }) {
                             <ResponsiveNavLink href={route('profile.edit')}>
                                 Profile
                             </ResponsiveNavLink>
-                            <Dropdown.Link href={route('recipes.create')}>
+                            <ResponsiveNavLink href={route('recipes.create')}>
                                 Submit Recipe
-                            </Dropdown.Link>
-
+                            </ResponsiveNavLink>
                             <ResponsiveNavLink method="post" href={route('logout')} as="button">
                                 Log Out
                             </ResponsiveNavLink>
@@ -120,13 +113,7 @@ export default function Authenticated({ user, header, children }) {
                 </div>
             </nav>
 
-            {header && (
-                <header className="bg-white shadow">
-                    <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">{header}</div>
-                </header>
-            )}
-
-            <main>{children}</main>
+            <main className="mx-auto w-4/5">{children}</main>
         </div>
     );
 }

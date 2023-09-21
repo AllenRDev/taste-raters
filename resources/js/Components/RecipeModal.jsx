@@ -12,8 +12,9 @@ const RecipeModal = ({ recipe, isOpen, onClose }) => {
       onRequestClose={closeModal}
       className="modal-content"
       overlayClassName="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
+      shouldFocusAfterRender={false}
     >
-      <div className="modal-container bg-white p-4 rounded-lg shadow-lg w-3/5 h-screen md:h-fit max-h-screen overflow-scroll mx-auto">
+      <div className="modal-container bg-white p-4 rounded-lg shadow-lg w-4/5 md:w-3/5 h-screen md:h-fit max-h-screen overflow-scroll mx-auto">
         <div className="modal-header flex justify-between items-center pb-2 border-b">
           <h2 className="text-2xl font-semibold">{recipe.name}</h2>
           <button
