@@ -56,14 +56,14 @@ class RecipeController extends Controller
 
         $validated = $request->validate([
             'name' => 'required|string|max:50',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image_path' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'description' => 'required|string|max:255',
             'ingredients' => 'required|json',
             'instructions' => 'required|json',
         ]);
 
         //Store and save images in storage/app/public folder
-        $validated['image'] = $request->file('image')->store('recipe-images', 'public');
+        $validated['image_path'] = $request->file('image_path')->store('recipe-images', 'public');
         
         $request->user()->recipes()->create($validated);
 

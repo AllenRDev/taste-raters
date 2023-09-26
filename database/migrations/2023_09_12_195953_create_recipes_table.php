@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->string('name');
-            $table->string('image');
+            $table->string('image_path');
             $table->text('description');
             $table->json('ingredients');
             $table->json('instructions');

@@ -7,7 +7,7 @@ import { useForm, Head } from '@inertiajs/react';
 export default function Create({ auth }) {
   const { data, setData, post, processing, reset, errors } = useForm({
     name: '',
-    image: '',
+    image_path: '',
     description: '',
     ingredients: [''],
     instructions: [''],
@@ -21,7 +21,7 @@ export default function Create({ auth }) {
 
     const handleImageChange = (file) => {
       setRecipeImage(file);
-      setData('image', file);
+      setData('image_path', file);
     };
 
     const addIngredient = () => {
@@ -160,7 +160,7 @@ export default function Create({ auth }) {
                     </div>
                       )}
                   </div>
-                    <InputError message={errors.image} className='mb-2'/>
+                    <InputError message={errors.image_path} className='mb-2'/>
                     <div className="mb-3">
                     <label htmlFor="description" className="block text-sm font-medium text-gray-700">
                       Recipe Description

@@ -6,7 +6,7 @@ const Recipe = ({ recipe, onClick }) => {
     <div className="bg-white inline-block rounded-2xl shadow-xl" onClick={() => onClick(recipe)}>
       <div>
         <img
-          src={'storage/' + recipe.image}
+          src={'storage/' + recipe.image_path}
           alt={recipe.name}
           className='rounded-t-2xl w-full h-48 object-cover'
         />
