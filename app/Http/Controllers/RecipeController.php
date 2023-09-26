@@ -15,7 +15,9 @@ class RecipeController extends Controller
      */
     public function index(): Response
 {
-    $recipes = Recipe::with('user:id,name,image_path,description,ingredients,instructions')->latest()->get();
+
+    //Get all recipes
+    $recipes = Recipe::all();
 
     // Deserialize the 'ingredients' and 'instructions' fields in each recipe
     $recipes = $recipes->map(function ($recipe) {
@@ -23,10 +25,7 @@ class RecipeController extends Controller
         $recipe->instructions = json_decode($recipe->instructions);
         return $recipe;
     });
-
-    //Die dump type of ingredients and instructions
-    // var_dump($recipes[0]->ingredients);s
-
+    
     return Inertia::render('Recipes/Index', [
         'recipes' => $recipes,
     ]);
