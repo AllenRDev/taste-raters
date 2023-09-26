@@ -26,9 +26,9 @@ const RecipeModal = ({ recipe, isOpen, onClose }) => {
         </div>
         <div className="modal-body p-4">
           <img
-            src={recipe.image}
+            src={'storage/' + recipe.image}
             alt={recipe.title}
-            className="recipe-image mb-4 rounded-lg"
+            className="recipe-image mb-4 rounded-lg aspect-[4/3]"
           />
           <h3 className="text-lg font-semibold">Ingredients</h3>
           <ul className="list-disc list-inside">

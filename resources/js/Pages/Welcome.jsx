@@ -3,42 +3,56 @@ import { Link, Head } from '@inertiajs/react';
 
 const Welcome = () => {
   return (
-    <div className="min-h-screen flex flex-col relative bg">
-      <Head title="Welcome"/>
-      <header className="text-center p-3 md:p-6 absolute w-full z-10">
-        <h1 className="text-2xl md:text-6xl font-bold text-orange-200/80 mix-blend-color-burn font-lobster">Welcome to TasteRaters</h1>
-      </header>
-      <main className="flex-grow relative">
-        <div className='relative'>
-        <img
-          src='images/homepage/banner.png'
-          alt="Hero Image"
-          className="w-full h-screen object-cover "
-        />
-        <div class="absolute inset-0 bg-black opacity-30"></div>
-        </div>
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="border-t border-t-amber-950/40 border-l border-l-amber-950/40 border-b border-b-amber-800/40 border-r border-r-amber-800/40 border-amber-950 text-center p-4 md:p-6 rounded-lg bg-[#341803]/70 bg-blend-overlay">
-            <p className="text-lg md:text-xl font-bold text-[#EDCCA7]">Start your culinary journey today!</p>
-            <p className="text-sm md:text-lg text-[#F2C59C] mt-2">
-              Create an account to unlock a world of delicious recipes and culinary inspiration.
-            </p>
-            <div className="mt-4">
-            <Link href={route('login')} className="text-orange-200 font-bold px-4 py-2 text-sm md:text-lg md:px-6 md:py-3 block md:inline-block transition duration-300 ease-in-out">
-                Log in
-            </Link>
-            <Link href={route('register')} className="text-orange-200 font-bold px-4 py-2 text-sm md:text-lg md:px-6 md:py-3 block md:inline-block mt-2 md:mt-0 md:ml-4 transition duration-300 ease-in-out">
-                Register
-            </Link>
+    //Split the page into 2 columns one for an image the other for login register and call to action
 
+    <div className="flex h-screen justify-center bg-gradient-to-r from-slate-200 to-orange-200">
+      <Head title="Welcome" />
+      <div className="flex flex-grow flex-col justify-center py-12">
+        <div className="relative py-3 sm:max-w-xl sm:mx-auto">
+          <div className="absolute inset-0 bg-gradient-to-r from-orange-200 to-orange-300 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 rounded-3xl"></div>
+          <div className="relative px-4 py-10 bg-white shadow-lg rounded-3xl sm:p-20 mx-auto ">
+            <div className="max-w-md mx-auto">
+              <div className="flex items-center space-x-5">
+                <div className="h-14 w-14 bg-gradient-to-r from-orange-200 to-orange-300 rounded-full flex flex-shrink-0 justify-center items-center text-white text-2xl font-mono">
+                  <span className="material-icons">
+                    restaurant
+                  </span>
+                </div>
+                <div className="block pl-2 font-semibold text-xl self-start text-gray-700">
+                  <h2 className="leading-relaxed font-lobster">TasteRaters</h2>
+                  <p className="text-sm text-gray-500 font-normal leading-relaxed">A place to upload and compare recipes</p>
+                </div>
+              </div>
+              <div className="">
+                <div className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
+                  <p>Upload your own recipes and compare them to others.</p>
+                  <p>See how your recipes compare to others.</p>
+                  <p>Find new recipes to try.</p>
+                </div>
+                <div className="pt-6 text-base leading-6 font-bold sm:text-lg sm:leading-7 text-center">
+                  <p>Sign up for free</p>
+                </div>
+                <div className="flex flex-col pt-6">
+                  <Link href={route('register')} className="bg-gradient-to-r from-orange-200 to-orange-300 text-white font-bold py-2 rounded-md hover:from-orange-300 hover:to-orange-200 flex items-center justify-center">
+                    <span className="material-icons">
+                      person_add
+                    </span>
+                    <span className="ml-2">Register</span>
+                  </Link>
+                  <Link href={route('login')} className="bg-gradient-to-r from-orange-200 to-orange-300 text-white font-bold py-2 rounded-md hover:from-orange-300 hover:to-orange-200 flex items-center justify-center mt-4">
+                    <span className="material-icons">
+                      login
+                    </span>
+                    <span className="ml-2">Login</span>
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </main>
-      <footer className="bg-gray-900 text-white text-center py-2 absolute w-full bottom-0">
-        &copy; {new Date().getFullYear()} Tasterater. All rights reserved.
-      </footer>
-    </div>
+      </div>
+      </div>
+
   );
 }
 

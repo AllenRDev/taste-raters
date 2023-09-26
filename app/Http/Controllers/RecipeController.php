@@ -14,11 +14,23 @@ class RecipeController extends Controller
      * Display a listing of the resource.
      */
     public function index(): Response
-    {
-        return Inertia::render('Recipes/Index', [
-            'recipes' => Recipe::with('user:id,name,image,description,ingredients,instructions')->latest()->get(),
-        ]);
-    }
+{
+    $recipes = Recipe::with('user:id,name,image,description,ingredients,instructions')->latest()->get();
+
+    // Deserialize the 'ingredients' and 'instructions' fields in each recipe
+    $recipes = $recipes->map(function ($recipe) {
+        $recipe->ingredients = json_decode($recipe->ingredients);
+        $recipe->instructions = json_decode($recipe->instructions);
+        return $recipe;
+    });
+
+    //Die dump type of ingredients and instructions
+    // var_dump($recipes[0]->ingredients);s
+
+    return Inertia::render('Recipes/Index', [
+        'recipes' => $recipes,
+    ]);
+}
 
     /**
      * Show the form for creating a new resource.
@@ -35,10 +47,12 @@ class RecipeController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        
         $request->merge([
             'ingredients' => json_encode($request->ingredients),
             'instructions' => json_encode($request->instructions),
         ]);
+
 
         $validated = $request->validate([
             'name' => 'required|string|max:50',

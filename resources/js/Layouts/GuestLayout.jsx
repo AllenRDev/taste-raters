@@ -1,20 +1,22 @@
+
 export default function Guest({ children }) {
+    //Split the screen into two halves, one containing the image and the other containing the form, make the forms background white
+    //Add a mobile responsive version of the form
+    
     return (
-        <div className="min-h-screen flex flex-col relative">
-            <main className="flex-grow relative">
-                <img
-                    src='images/Guest.png'
-                    alt="Guest Image"
-                    className="w-full h-screen object-cover"
-                    loading="lazy"
-                />
-                <div className="absolute inset-0 bg-black opacity-20"></div>
-            </main>
-            <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#341803]/10 bg-blend-overlay">
-                <div className="border-t border-t-amber-950/40 border-l border-l-amber-950/40 border-b border-b-amber-800/40 border-r border-r-amber-800/40 border-amber-950 text-center p-4 md:p-6 rounded-lg bg-[#341803]/50 bg-blend-overlay">
+        <div className="min-h-screen bg-gradient-to-r from-slate-200 to-orange-200">
+        <div className="flex flex-col justify-center sm:py-12">
+            <div className="relative py-3 sm:max-w-xl sm:mx-auto">
+                <div className="absolute inset-0 bg-gradient-to-r from-orange-200 to-orange-300 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"></div>
+                <div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
                     {children}
                 </div>
             </div>
         </div>
+        
+    </div>
+
+
     );
+
 }

@@ -16,6 +16,11 @@ export default {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
                 lobster: ['Lobster']
             },
+            aspectRatio: {
+                '1/1': [1, 1],
+                '4/3': [4, 3],
+                '3/2': '3 / 2',
+              },
         },
     },
 

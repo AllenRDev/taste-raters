@@ -11,8 +11,6 @@ class Recipe extends Model
     use HasFactory;
 
     protected $casts = [
-        'ingredients' => 'array',
-        'instructions' => 'array',
         ];
         
 

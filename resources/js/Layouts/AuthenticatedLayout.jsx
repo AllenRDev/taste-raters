@@ -9,9 +9,9 @@ export default function Authenticated({ user, header, children }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
 
     return (
-        <div className="min-h-screen bg-slate-200">
-            <nav className="bg-slate-900 mb-12 py-3">
-                <div className="w-4/5 mx-auto">
+        <div className="min-h-screen bg-gradient-to-r from-slate-100 to-orange-100">
+            <nav className="bg-transparemt mb-4 py-3">
+                <div className="w-5/6 mx-auto">
                     <div className="flex justify-between">
                         <div className="flex">
                             <div className="shrink-0 flex items-center">
@@ -28,12 +28,12 @@ export default function Authenticated({ user, header, children }) {
                                         <span className="inline-flex rounded-md">
                                             <button
                                                 type="button"
-                                                className="inline-flex items-center px-3 py-2 text-sm text-white leading-4 font-medium rounded-md bg-blend-overlay focus:outline-none transition ease-in-out duration-150"
+                                                className="inline-flex items-center px-3 py-2 text-sm text-slate-800 leading-4 font-medium rounded-md bg-blend-overlay focus:outline-none transition ease-in-out duration-150"
                                             >
                                                 {user.name}
 
                                                 <svg
-                                                    className="ml-2 -mr-0.5 h-4 w-4 fill-white"
+                                                    className="ml-2 -mr-0.5 h-4 w-4 fill-slate-800"
                                                     xmlns="http://www.w3.org/2000/svg"
                                                     viewBox="0 0 20 20"
                                                     fill="currentColor"
@@ -62,7 +62,7 @@ export default function Authenticated({ user, header, children }) {
                         <div className="flex items-center sm:hidden">
                             <button
                                 onClick={() => setShowingNavigationDropdown((previousState) => !previousState)}
-                                className="inline-flex items-center justify-center p-2 rounded-md text-white focus:outline-none focus:bg-gray-900 focus:text-gray-500 transition duration-150 ease-in-out"
+                                className="inline-flex items-center justify-center p-2 rounded-md text-white focus:outline-none focus:bg-transparent focus:text-gray-500 transition duration-150 ease-in-out"
                             >
                                 <svg className="h-6 w-6 text-gray-800" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                                     <path

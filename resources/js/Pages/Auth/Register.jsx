@@ -32,7 +32,7 @@ export default function Register() {
 
             <form onSubmit={submit}>
             <div className="text-left">
-                <Link href="/" className="text-orange-200/80 hover:text-orange-100 text-sm transition-colors duration-300">
+                <Link href="/" className="text-orange-300/80 hover:text-orange-100 text-sm transition-colors duration-300">
                     <span className='material-symbols-outlined'>arrow_back</span> 
                 </Link>
             </div>
@@ -107,7 +107,7 @@ export default function Register() {
                 <div className="flex items-center justify-end mt-4">
                     <Link
                         href={route('login')}
-                        className="underline text-sm text-orange-200 hover:text-orange-400 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        className="underline text-sm text-orange-300 hover:text-orange-400 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
                         Already registered?
                     </Link>
