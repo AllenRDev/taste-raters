@@ -15,7 +15,7 @@ class RecipeController extends Controller
      */
     public function index(): Response
 {
-    $recipes = Recipe::with('user:id,name,image,description,ingredients,instructions')->latest()->get();
+    $recipes = Recipe::with('user:id,name,image_path,description,ingredients,instructions')->latest()->get();
 
     // Deserialize the 'ingredients' and 'instructions' fields in each recipe
     $recipes = $recipes->map(function ($recipe) {
